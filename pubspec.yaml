@@ -1,0 +1,104 @@
+name: nova_frame
+description: "Flutter项目基建框架"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # 深链
+  app_links: ^7.0.0
+
+  # 路由
+  auto_route: ^11.1.0
+
+  # HTTP
+  dio: ^5.9.0
+  pretty_dio_logger: ^1.4.0
+  connectivity_plus: ^6.1.4
+  device_info_plus: ^11.5.0
+  flutter_udid: ^4.0.0
+  uuid: ^4.5.1
+
+  provider: ^6.1.5
+
+  # 加载json格式动画文件
+  lottie: ^3.1.3
+
+  # UI：屏幕适配
+  flutter_screenutil: ^5.9.3
+
+  # 本地存储：配置（轻量 KV）
+  shared_preferences: ^2.5.3
+
+  # 本地存储：敏感信息（登录 token 等）
+  flutter_secure_storage: ^9.2.4
+
+  # 本地存储：接口数据缓存（SQLite，drift）
+  drift: ^2.33.0
+  drift_flutter: ^0.3.0
+  sqlite3_flutter_libs: ^0.6.0+eol
+  path: ^1.9.1
+  path_provider: ^2.1.5
+
+  # 文件缓存：音视频/图片
+  flutter_cache_manager: ^3.4.1
+
+  # 获取应用版本信息
+  package_info_plus: ^8.0.3
+
+  # 权限
+  permission_handler: ^12.0.1
+
+  fluttertoast: ^9.0.0
+  webview_flutter: ^4.13.1
+  easy_refresh: ^3.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # auto_route 路由代码生成
+  auto_route_generator: ^10.5.0
+
+  # 资源引用自动生成（flutter_gen）
+  flutter_gen_runner: ^5.11.0
+
+  # drift 代码生成
+  drift_dev: ^2.33.0
+  build_runner: ^2.4.12
+
+flutter_gen:
+  # 输出目录
+  output: lib/generated/
+  line_length: 100
+  integrations:
+    lottie: true
+
+flutter:
+  uses-material-design: true
+
+  # 资源目录声明
+  assets:
+    - assets/font/chinese/
+    - assets/font/english/
+    - assets/images/
+    - assets/json/
+
+  # 字体声明
+  fonts:
+    - family: YouYuan
+      fonts:
+        - asset: assets/font/chinese/YouYuan.ttf
+    - family: Courier
+      fonts:
+        - asset: assets/font/english/Courier.ttf
+

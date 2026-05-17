@@ -1,0 +1,10 @@
+{
+  "name": "kit",
+  "version": 1,
+  "features": ["load_asset_json", "toast", "system_ui"],
+  "nested": {
+    "enabled": true,
+    "count": 3
+  }
+}
+
