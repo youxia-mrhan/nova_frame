@@ -33,7 +33,7 @@ class PlatformChannel(
     }
 
     companion object {
-        const val CHANNEL_NAME = "kit/platform"
+        const val CHANNEL_NAME = "nova/platform"
         const val METHOD_GET_PLATFORM_VERSION = "getPlatformVersion"
     }
 }

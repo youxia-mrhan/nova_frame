@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 
 final class PlatformChannel {
-  private static let channelName = "kit/platform"
+  private static let channelName = "nova/platform"
   private static let methodGetPlatformVersion = "getPlatformVersion"
 
   static func register(with messenger: FlutterBinaryMessenger) {

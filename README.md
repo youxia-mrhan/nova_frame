@@ -32,7 +32,6 @@ Flutter 基建与示例工程：路由、网络、存储、主题、埋点、状
 ```bash
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs
-flutter run
 ```
 
 

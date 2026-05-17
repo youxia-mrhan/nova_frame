@@ -88,16 +88,12 @@ flutter:
 
   # 资源目录声明
   assets:
-    - assets/font/chinese/
     - assets/font/english/
     - assets/images/
     - assets/json/
 
   # 字体声明
   fonts:
-    - family: YouYuan
-      fonts:
-        - asset: assets/font/chinese/YouYuan.ttf
     - family: Courier
       fonts:
         - asset: assets/font/english/Courier.ttf

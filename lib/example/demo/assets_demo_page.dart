@@ -51,9 +51,9 @@ class AssetsDemoPage extends NovaPageShell {
           SizedBox(height: 20.dp),
           Text('字体（使用 FontFamily.xxx）', style: Theme.of(context).textTheme.titleMedium),
           SizedBox(height: 8.dp),
-          Text('中文字体：YouYuan', style: const TextStyle(fontFamily: FontFamily.youYuan)),
+          Text('默认主题字体', style: Theme.of(context).textTheme.bodyLarge),
           SizedBox(height: 4.dp),
-          Text('英文字体：Courier', style: const TextStyle(fontFamily: FontFamily.courier)),
+          Text('自定义英文字体：Courier', style: const TextStyle(fontFamily: FontFamily.courier)),
         ],
       ),
     );

@@ -13,7 +13,4 @@ class FontFamily {
 
   /// Font family: Courier
   static const String courier = 'Courier';
-
-  /// Font family: YouYuan
-  static const String youYuan = 'YouYuan';
 }

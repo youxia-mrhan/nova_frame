@@ -15,9 +15,6 @@ import 'package:lottie/lottie.dart' as _lottie;
 class $AssetsFontGen {
   const $AssetsFontGen();
 
-  /// Directory path: assets/font/chinese
-  $AssetsFontChineseGen get chinese => const $AssetsFontChineseGen();
-
   /// Directory path: assets/font/english
   $AssetsFontEnglishGen get english => const $AssetsFontEnglishGen();
 }
@@ -46,16 +43,6 @@ class $AssetsJsonGen {
 
   /// List of all assets
   List<dynamic> get values => [demo, loading];
-}
-
-class $AssetsFontChineseGen {
-  const $AssetsFontChineseGen();
-
-  /// File path: assets/font/chinese/YouYuan.ttf
-  String get youYuan => 'assets/font/chinese/YouYuan.ttf';
-
-  /// List of all assets
-  List<String> get values => [youYuan];
 }
 
 class $AssetsFontEnglishGen {

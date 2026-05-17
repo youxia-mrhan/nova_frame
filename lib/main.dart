@@ -1,21 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'core/navigation/nova_route_observer.dart';
-import 'core/services/network/config/api_config.dart';
-import 'core/navigation/nova_router.dart';
-import 'core/telemetry/lifecycle/app_lifecycle_tracker.dart';
 import 'app/theme/app_theme.dart';
 import 'app/theme/theme_controller.dart';
 import 'app/theme/theme_scope.dart';
+import 'core/navigation/nova_route_observer.dart';
+import 'core/navigation/nova_router.dart';
+import 'core/services/network/config/api_config.dart';
 import 'core/shared/box/adapt.dart';
+import 'core/telemetry/lifecycle/app_lifecycle_tracker.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ApiConfig.loadPersistedOrDefault();
   if (kDebugMode) {
-    // 配置代理抓包
-    // ApiClient.setProxy('192.168.40.187:9000');
+    // 配置代理抓包（示例）：
+    // ApiClient.setProxy('127.0.0.1:8888');
   }
   runApp(const _App());
 }
