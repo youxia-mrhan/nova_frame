@@ -47,7 +47,7 @@ dart run build_runner build --delete-conflicting-outputs
 │    · foundation — 日志 / Vns·Obx 状态封装                 │
 │    · telemetry  — 页面停留埋点                            │
 ├─────────────────────────────────────────────────────────┤
-│  features（业务模块，按 feature 拆分；新业务代码放此层）     	│
+│  features（业务模块，按 feature 拆分；新业务代码放此层）      │
 └─────────────────────────────────────────────────────────┘
 ```
 
