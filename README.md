@@ -38,11 +38,16 @@ dart run build_runner build --delete-conflicting-outputs
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  app（网络 / 路由 / 存储 / 主题 / 埋点 / 原生）         		
-├─────────────────────────────────────────────────────────┤ 
-│  core（通用 UI / 工具 / 状态封装）                      	 
+│  app（主题 / 文案资源 / 设备形态 / System UI / 页面 Mixin）  │
 ├─────────────────────────────────────────────────────────┤
-│  features（业务）                                        
+│  core（基建）                                            │
+│    · navigation — 路由 / 深链                            │
+│    · services   — 网络 / 存储 / 原生 Channel              │
+│    · shared     — 通用 UI / 工具 / EventBus / WebView    │
+│    · foundation — 日志 / Vns·Obx 状态封装                 │
+│    · telemetry  — 页面停留埋点                            │
+├─────────────────────────────────────────────────────────┤
+│  features（业务模块，按 feature 拆分；新业务代码放此层）     	│
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -53,7 +58,7 @@ dart run build_runner build --delete-conflicting-outputs
 ```
 lib
 ├── main.dart                                         # 默认启动入口：初始化环境、主题、路由
-├── app                                               # 应用层：基建能力
+├── app                                               # 应用层：主题、资源、设备形态、页面 Mixin
 │   ├── device
 │   │   └── device_form_factor.dart                   # 设备形态（手机/平板等）判断
 │   ├── page
@@ -174,19 +179,19 @@ lib
 │       └── uploader
 │           └── session_uploader.dart                 # Session 上报
 ├── example                                           # 示例与 Demo（不参与正式业务）
-│   ├── demo_home_page.dart                           # Demo 首页入口
-│   ├── demo                                          # 各能力单点 Demo
-│   ├── net_demo                                      # 网络 / 缓存 / Token 刷新 Demo
-│   ├── router_demo                                   # 路由传参、登录 Demo
-│   ├── push_link                                     # 模拟 推送 / Link 跳转
-│   └── telemetry_demo                                # 页面 Session 埋点 Demo
+│   ├── demo_home_page.dart                           	# Demo 首页入口
+│   ├── demo                                          	# 各能力单点 Demo
+│   ├── net_demo                                      	# 网络 / 缓存 / Token 刷新 Demo
+│   ├── router_demo                                   	# 路由传参、登录 Demo
+│   ├── push_link                                     	# 模拟 推送 / Link 跳转
+│   └── telemetry_demo                                	# 页面 Session 埋点 Demo
 ├── features                                          # 业务功能模块（按 feature 拆分，待接入）
-│   ├── home                                          # 首页模块占位
-│   ├── order                                         # 订单模块占位
-│   └── personal                                      # 个人中心模块占位
+│   ├── home                                          	# 首页模块占位
+│   ├── order                                         	# 订单模块占位
+│   └── personal                                      	# 个人中心模块占位                                      
 └── generated                                         # 代码生成（勿手改）
-    ├── assets.gen.dart                               # 图片 / JSON 资源引用
-    └── fonts.gen.dart                                # 字体资源引用
+    ├── assets.gen.dart                               	# 图片 / JSON 资源引用
+    └── fonts.gen.dart                                	# 字体资源引用
 
 assets
 ├── font                                              # 中英文字体
