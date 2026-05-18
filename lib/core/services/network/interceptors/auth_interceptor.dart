@@ -79,7 +79,7 @@ final class AuthInterceptor extends dio_pkg.Interceptor {
       }
 
       // 唤醒登录页
-      await ctx.push(path: LoginFullRt.path, description: LoginFullRt.description);
+      await ctx.push(path: LoginFullRt.path);
 
       // 登录页成功后，重新请求，之前触发401的接口
       await notifyLoginSuccess();
@@ -101,12 +101,12 @@ final class AuthInterceptor extends dio_pkg.Interceptor {
       //      await ApiTokenVault.deleteRefreshToken();
       //
       //      // 然后唤醒登录页
-      //      await ctx.push(path: LoginFullRt.path, description: LoginFullRt.description);
+      //      await ctx.push(path: LoginFullRt.path);
       //      await notifyLoginSuccess();
       //    }
       //  } else {
       //      // 没有refreshToken，直接唤醒登录页
-      //      await ctx.push(path: LoginFullRt.path, description: LoginFullRt.description);
+      //      await ctx.push(path: LoginFullRt.path);
       //      await notifyLoginSuccess();
       //  }
     } catch (e, st) {
