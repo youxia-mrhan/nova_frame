@@ -139,11 +139,14 @@ class PermissionDemoPage extends NovaPageShell {
             ),
           ),
           SizedBox(height: 8.dp),
+          Text('模拟器只能跳转到系统设置\nIOS真机测试，才能跳转到App权限列表',style: TextStyle(fontSize: 12.fs)),
+          SizedBox(height: 8.dp),
           OutlinedButton.icon(
             onPressed: () => _openSettings(context),
             icon: const Icon(Icons.settings_outlined),
             label: const Text('打开系统设置（openAppSettings）'),
           ),
+          SizedBox(height: 16.dp),
         ],
       ),
     );
