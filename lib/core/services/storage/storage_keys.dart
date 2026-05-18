@@ -18,6 +18,9 @@ abstract final class StorageKeys {
   /// 切换环境标记
   static const String apiEnvironmentV1 = 'nova.api.environment_v1';
 
+  /// 页面 Session 埋点全局开关
+  static const String telemetryEnabledV1 = 'nova.telemetry.enabled_v1';
+
   static const String apiHomeFeedV1 = 'nova.api.home_feed_v1';
   static const String authTokenV1 = 'nova.auth.token_v1';
 

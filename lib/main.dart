@@ -9,10 +9,12 @@ import 'core/navigation/nova_router.dart';
 import 'core/services/network/config/api_config.dart';
 import 'core/shared/box/adapt.dart';
 import 'core/telemetry/lifecycle/app_lifecycle_tracker.dart';
+import 'core/telemetry/telemetry_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ApiConfig.loadPersistedOrDefault();
+  await TelemetryConfig.loadPersistedOrDefault();
   if (kDebugMode) {
     // 配置代理抓包（示例）：
     // ApiClient.setProxy('127.0.0.1:8888');

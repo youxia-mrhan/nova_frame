@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:nova_frame/core/telemetry/models/nav_operation.dart';
 import 'package:nova_frame/core/telemetry/session/session_tracker.dart';
+import 'package:nova_frame/core/telemetry/telemetry_config.dart';
 import 'package:nova_frame/core/telemetry/uploader/session_uploader.dart';
 
 import 'package:nova_frame/example/demo_home_page.dart';
@@ -20,6 +21,7 @@ mixin SessionRouteObserverMixin on RouteObserver<PageRoute<dynamic>> {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
+    if (!TelemetryConfig.enabled) return;
     if (route is! PageRoute<dynamic>) return;
     final pr = route;
     () async {
@@ -34,6 +36,7 @@ mixin SessionRouteObserverMixin on RouteObserver<PageRoute<dynamic>> {
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
+    if (!TelemetryConfig.enabled) return;
     if (route is! PageRoute<dynamic>) return;
     final popped = route;
     () async {
@@ -44,6 +47,7 @@ mixin SessionRouteObserverMixin on RouteObserver<PageRoute<dynamic>> {
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didRemove(route, previousRoute);
+    if (!TelemetryConfig.enabled) return;
     if (route is! PageRoute<dynamic>) return;
     final removed = route;
     () async {
@@ -54,6 +58,7 @@ mixin SessionRouteObserverMixin on RouteObserver<PageRoute<dynamic>> {
   @override
   void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    if (!TelemetryConfig.enabled) return;
     () async {
       if (oldRoute is PageRoute<dynamic>) {
         await SessionTracker.handlePop(oldRoute, exitRouteNavOp: NavOperation.replace);

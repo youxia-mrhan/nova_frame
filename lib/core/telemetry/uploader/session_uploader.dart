@@ -1,4 +1,5 @@
 import 'package:nova_frame/core/telemetry/session/session_tracker.dart';
+import 'package:nova_frame/core/telemetry/telemetry_config.dart';
 
 import 'package:nova_frame/core/foundation/logger/nova_logger.dart';
 import 'package:nova_frame/core/services/storage/drift/nova_database.dart';
@@ -47,6 +48,7 @@ abstract final class SessionUploader {
   }
 
   static Future<int> tryFlushRootStackPipeline() async {
+    if (!TelemetryConfig.enabled) return 0;
     if (_uploading) return 0;
     _uploading = true;
     List<String> idsToSend = const [];

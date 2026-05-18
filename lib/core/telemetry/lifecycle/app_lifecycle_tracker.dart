@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:nova_frame/core/telemetry/telemetry_config.dart';
 import 'package:nova_frame/core/telemetry/uploader/session_uploader.dart';
 
 /// 上传埋点数据时机：
@@ -28,7 +29,7 @@ class _AppLifecycleTrackerState extends State<AppLifecycleTracker> with WidgetsB
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
+    if (state == AppLifecycleState.paused && TelemetryConfig.enabled) {
       SessionUploader.tryFlushRootStackPipeline();
     }
   }

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:nova_frame/core/telemetry/models/nav_operation.dart';
 import 'package:nova_frame/core/telemetry/models/session_constants.dart';
 import 'package:nova_frame/core/telemetry/navigation/nav_telemetry_labels.dart';
+import 'package:nova_frame/core/telemetry/telemetry_config.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'package:nova_frame/core/foundation/reactive/value_state.dart';
@@ -95,6 +96,7 @@ abstract final class SessionTracker {
   }
 
   static Future<void> handlePush(PageRoute<dynamic> route, {String entryRouteNavOp = NavOperation.push}) async {
+    if (!TelemetryConfig.enabled) return;
     final sessionId = _newSessionId();
     final now = Storage.nowMs();
     final routeKey = route.settings.name;
@@ -131,6 +133,7 @@ abstract final class SessionTracker {
   }
 
   static Future<void> handlePop(PageRoute<dynamic> route, {String exitRouteNavOp = NavOperation.pop}) async {
+    if (!TelemetryConfig.enabled) return;
     final identity = identityHashCode(route);
     final sessionId = _routeIdentityToSessionId.remove(identity);
     if (sessionId == null) return;
@@ -159,6 +162,7 @@ abstract final class SessionTracker {
 
   /// 记录当前页面中，发生的行为
   static Future<void> appendAction({required String label, String? result, String? desc}) async {
+    if (!TelemetryConfig.enabled) return;
     await _awaitFlushReplaceBarrierIfHeld();
     final sid = currentSessionId;
     if (sid == null) return;

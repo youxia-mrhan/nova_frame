@@ -13,6 +13,7 @@ import '../../core/services/storage/storage.dart';
 import '../../core/services/storage/user_identity.dart';
 import '../../core/telemetry/session/session_scope.dart';
 import '../../core/telemetry/session/session_tracker.dart';
+import '../../core/telemetry/telemetry_config.dart';
 import '../../core/telemetry/uploader/session_uploader.dart';
 import '../../core/foundation/logger/nova_logger.dart';
 import '../../core/shared/box/adapt.dart';
@@ -97,6 +98,20 @@ class _SessionTrackerDemoPageState extends NovaStatefulPageShellState<SessionTra
       body: ListView(
         padding: EdgeInsets.all(16.dp),
         children: [
+          Text('全局开关', style: theme.textTheme.titleMedium),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('页面停留埋点'),
+            subtitle: Text(
+              TelemetryConfig.enabled ? '已开启：记录会话并上传' : '已关闭：不写入、不上传',
+            ),
+            value: TelemetryConfig.enabled,
+            onChanged: (v) async {
+              await TelemetryConfig.setEnabled(v);
+              if (mounted) setState(() {});
+            },
+          ),
+          SizedBox(height: 16.dp),
           Text('会话与身份', style: theme.textTheme.titleMedium),
           SizedBox(height: 8.dp),
           _kv('session_id', sid ?? '（无）'),
