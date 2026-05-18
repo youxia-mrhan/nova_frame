@@ -44,7 +44,7 @@ class ApiConfig {
   }
 
   /// 冷启动从 [SharedPreferences] 恢复
-  /// 无记录或非法值则保持默认 [ApiEnvironment.prod]
+  /// 无记录或非法值则保持默认环境
   static Future<void> loadPersistedOrDefault() async {
     final idx = await Storage.prefGetInt(_environmentPrefsKey);
     if (idx == null) return;
