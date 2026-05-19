@@ -60,7 +60,7 @@ lib
 ├── main.dart                                         # 默认启动入口：初始化环境、主题、路由
 ├── app                                               # 应用层：主题、资源、设备形态、页面 Mixin
 │   ├── device
-│   │   └── device_form_factor.dart                   # 设备形态（手机/平板等）判断
+│   │   └── device_form_factor.dart                   # 设备形态（手机 / iPad 竖横屏 / 折叠屏）
 │   ├── page
 │   │   └── mixins
 │   │       ├── app_lifecycle_mixin.dart              # 应用前后台生命周期
@@ -146,7 +146,8 @@ lib
 │   │   │       ├── double_tap_exit.dart              # 双击返回退出 App
 │   │   │       └── rate_limit_tap.dart               # 防重复点击
 │   │   ├── box
-│   │   │   └── adapt.dart                            # ScreenUtil 封装：12.dp / 14.fs / 12.rd
+│   │   │   ├── adapt.dart                            # 根节点 ScreenAdaptInit + 12.dp / 14.fs / 12.rd
+│   │   │   └── app_design_size.dart                  # 手机 / iPad 竖横屏 / 折叠屏设计稿尺寸
 │   │   ├── dialog
 │   │   │   ├── bottom_sheet_dialog.dart              # 底部半屏弹窗
 │   │   │   ├── custom_dialog_util.dart               # 自定义 Dialog 动画
@@ -217,7 +218,7 @@ test
 | 加载本地 JSON Demo                      | 读取本地json文件 |
 | FlutterGen Assets Demo              | 加载各种静态资源 |
 | 主题切换 Demo                           | light / dark / ocean / berry 四套主题 |
-| 设备形态适配 Demo                         | phone / pad / 折叠屏 |
+| 设备形态适配 Demo                         | phone / pad / padLandscape / 折叠屏 |
 | AdaptiveStatefulPage Demo           | 封装的页面基类 |
 | 常用 Mixins Demo                      | App 生命周期、键盘显/隐、监听当前页面(pop、push等) |
 | 路由可读信息 Demo                         | 在当前页面，获取在路由中的配置信息 |

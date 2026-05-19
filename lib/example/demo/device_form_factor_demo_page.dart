@@ -5,6 +5,7 @@ import '../../../app/device/device_form_factor.dart';
 import '../../core/shared/layouts/nova_page_shell.dart';
 import '../../core/navigation/annotation/nova_route.dart';
 import '../../core/shared/box/adapt.dart';
+import '../../core/shared/box/app_design_size.dart';
 
 abstract final class DeviceFormFactorDemoRt {
   DeviceFormFactorDemoRt._();
@@ -31,7 +32,16 @@ class DeviceFormFactorDemoPage extends NovaPageShell {
     return _DemoScaffold(
       title: 'pad',
       color: Colors.blue,
-      body: const Text('这是 Pad 布局'),
+      body: const Text('这是 Pad 竖屏布局'),
+    );
+  }
+
+  @override
+  Widget buildPadLandscape(BuildContext context) {
+    return _DemoScaffold(
+      title: 'padLandscape',
+      color: Colors.teal,
+      body: const Text('这是 Pad 横屏布局'),
     );
   }
 
@@ -68,6 +78,7 @@ class _DemoScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     final factor = DeviceFormFactorUtil.of(context);
+    final designSize = AppDesignSize.of(factor);
 
     return Scaffold(
       appBar: AppBar(title: const Text('设备形态 Demo')),
@@ -78,7 +89,11 @@ class _DemoScaffold extends StatelessWidget {
           children: [
             Text('识别结果：${factor.name}', style: const TextStyle(fontWeight: FontWeight.w700)),
             SizedBox(height: 8.dp),
-            Text('size: ${mq.size.width.toStringAsFixed(0)} x ${mq.size.height.toStringAsFixed(0)}'),
+            Text(
+              '设计稿：${designSize.width.toStringAsFixed(0)} x ${designSize.height.toStringAsFixed(0)}',
+            ),
+            SizedBox(height: 8.dp),
+            Text('屏幕：${mq.size.width.toStringAsFixed(0)} x ${mq.size.height.toStringAsFixed(0)}'),
             SizedBox(height: 12.dp),
             Container(
               width: double.infinity,

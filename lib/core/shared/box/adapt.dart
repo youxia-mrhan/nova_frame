@@ -1,24 +1,33 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nova_frame/app/device/device_form_factor.dart';
+import 'package:nova_frame/core/shared/box/app_design_size.dart';
 
-/// 包装一层，如果flutter_screenutil框架停止维护，方便替换其他的适配方案
+/// 根节点屏幕适配：按设备形态切换全局 [AppDesignSize] 设计稿。
+///
+/// 手机 / iPad 竖横屏 / 折叠屏使用事先定义的尺寸；
+/// 形态变化时通过 [ValueKey] 重新 init。
 class ScreenAdaptInit extends StatelessWidget {
   const ScreenAdaptInit({
     super.key,
     required this.child,
-    this.designSize = const Size(375, 812),
   });
 
   final Widget child;
-  final Size designSize;
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.maybeOf(context) ?? MediaQueryData.fromView(View.of(context));
+    final factor = DeviceFormFactorUtil.fromMediaQuery(mq);
+    final designSize = AppDesignSize.of(factor);
+
     return ScreenUtilInit(
+      key: ValueKey('${designSize.width}x${designSize.height}'),
       designSize: designSize,
       minTextAdapt: false,
       splitScreenMode: true,
       builder: (context, childWidget) => child,
+      child: child,
     );
   }
 }

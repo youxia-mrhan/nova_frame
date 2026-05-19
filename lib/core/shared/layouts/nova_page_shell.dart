@@ -77,6 +77,7 @@ abstract class NovaPageShell extends StatelessWidget {
           final Widget child = switch (DeviceFormFactorUtil.of(scopedContext)) {
             DeviceFormFactor.phone => buildPhone(scopedContext),
             DeviceFormFactor.pad => buildPad(scopedContext),
+            DeviceFormFactor.padLandscape => buildPadLandscape(scopedContext),
             DeviceFormFactor.foldable => buildFoldable(scopedContext),
           };
 
@@ -131,6 +132,8 @@ abstract class NovaPageShell extends StatelessWidget {
 
   Widget buildPad(BuildContext context) => buildPhone(context);
 
+  Widget buildPadLandscape(BuildContext context) => buildPad(context);
+
   Widget buildFoldable(BuildContext context) => buildPhone(context);
 }
 
@@ -180,6 +183,7 @@ abstract class NovaStatefulPageShellState<T extends NovaStatefulPageShell> exten
           final Widget child = switch (DeviceFormFactorUtil.of(scopedContext)) {
             DeviceFormFactor.phone => buildPhone(scopedContext),
             DeviceFormFactor.pad => buildPad(scopedContext),
+            DeviceFormFactor.padLandscape => buildPadLandscape(scopedContext),
             DeviceFormFactor.foldable => buildFoldable(scopedContext),
           };
 
@@ -231,6 +235,8 @@ abstract class NovaStatefulPageShellState<T extends NovaStatefulPageShell> exten
   Widget buildPhone(BuildContext context);
 
   Widget buildPad(BuildContext context) => buildPhone(context);
+
+  Widget buildPadLandscape(BuildContext context) => buildPad(context);
 
   Widget buildFoldable(BuildContext context) => buildPhone(context);
 }

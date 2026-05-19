@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../app/device/device_form_factor.dart';
 import '../../core/foundation/logger/nova_logger.dart';
 import '../../core/navigation/annotation/nova_route.dart';
 import '../../core/shared/box/adapt.dart';
+import '../../core/shared/box/app_design_size.dart';
 import '../../core/shared/layouts/nova_page_shell.dart';
 import '../../core/shared/util/toast_util.dart';
 
@@ -22,6 +24,9 @@ class ScreenUtilDemoPage extends NovaPageShell {
 
   @override
   Widget buildPhone(BuildContext context) {
+    final mq = MediaQuery.of(context);
+    final factor = DeviceFormFactorUtil.of(context);
+    final designSize = AppDesignSize.of(factor);
     final a = 12.dp;
     final b = 14.fs;
     final c = 12.rd;
@@ -32,6 +37,17 @@ class ScreenUtilDemoPage extends NovaPageShell {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.dp),
+              child: Text(
+                '形态：${factor.name}\n'
+                '设计稿：${designSize.width.toInt()}×${designSize.height.toInt()}\n'
+                '屏幕：${mq.size.width.toInt()}×${mq.size.height.toInt()}',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13.fs, color: Colors.blueGrey),
+              ),
+            ),
+            SizedBox(height: 12.dp),
             Container(
               width: 200.dp,
               height: 80.dp,

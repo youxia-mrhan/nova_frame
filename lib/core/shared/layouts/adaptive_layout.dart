@@ -22,6 +22,7 @@ class AdaptiveLayout extends StatelessWidget {
     return switch (DeviceFormFactorUtil.of(context)) {
       DeviceFormFactor.phone => mobile(context),
       DeviceFormFactor.pad => (tablet ?? mobile)(context),
+      DeviceFormFactor.padLandscape => (tablet ?? mobile)(context),
       DeviceFormFactor.foldable => (foldable ?? tablet ?? mobile)(context),
     };
   }
@@ -52,6 +53,7 @@ class _AdaptiveStatefulLayoutState extends State<AdaptiveStatefulLayout> {
     return switch (DeviceFormFactorUtil.of(context)) {
       DeviceFormFactor.phone => widget.mobile(context),
       DeviceFormFactor.pad => (widget.tablet ?? widget.mobile)(context),
+      DeviceFormFactor.padLandscape => (widget.tablet ?? widget.mobile)(context),
       DeviceFormFactor.foldable => (widget.foldable ?? widget.tablet ?? widget.mobile)(context),
     };
   }

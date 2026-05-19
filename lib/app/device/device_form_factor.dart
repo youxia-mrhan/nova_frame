@@ -5,8 +5,11 @@ enum DeviceFormFactor {
   /// 手机（默认）
   phone,
 
-  /// 平板
+  /// 平板竖屏
   pad,
+
+  /// 平板横屏
+  padLandscape,
 
   /// 折叠屏/双屏
   foldable,
@@ -16,7 +19,7 @@ enum DeviceFormFactor {
 ///
 /// 规则
 /// - foldable：判断 `MediaQuery.displayFeatures`
-/// - pad：使用 `shortestSide >= 600`
+/// - pad / padLandscape：`shortestSide >= 600`，横竖屏由宽高判断
 /// - 其余为 phone。
 class DeviceFormFactorUtil {
   DeviceFormFactorUtil._();
@@ -24,14 +27,16 @@ class DeviceFormFactorUtil {
   static const double _padShortestSideThreshold = 600;
 
   static DeviceFormFactor of(BuildContext context) {
-    final mq = MediaQuery.of(context);
+    return fromMediaQuery(MediaQuery.of(context));
+  }
+
+  static DeviceFormFactor fromMediaQuery(MediaQueryData mq) {
     if (mq.displayFeatures.isNotEmpty) {
       return DeviceFormFactor.foldable;
     }
     if (mq.size.shortestSide >= _padShortestSideThreshold) {
-      return DeviceFormFactor.pad;
+      return mq.size.width > mq.size.height ? DeviceFormFactor.padLandscape : DeviceFormFactor.pad;
     }
     return DeviceFormFactor.phone;
   }
 }
-
