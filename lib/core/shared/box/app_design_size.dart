@@ -6,21 +6,16 @@ abstract final class AppDesignSize {
   AppDesignSize._();
 
   /// 手机竖屏设计稿（如 iPhone X / 13）。
-  static const Size phone = Size(375, 812);
+  static const Size phone = DeviceFormFactorUtil.designPhone;
 
   /// iPad 竖屏设计稿。
-  static const Size pad = Size(768, 1024);
+  static const Size pad = DeviceFormFactorUtil.designPad;
 
   /// iPad 横屏设计稿。
-  static const Size padLandscape = Size(1024, 768);
+  static const Size padLandscape = DeviceFormFactorUtil.designPadLandscape;
 
   /// 折叠屏展开态设计稿（可按 UI 调整）。
-  static const Size foldable = Size(673, 841);
+  static const Size foldable = DeviceFormFactorUtil.designFoldable;
 
-  static Size of(DeviceFormFactor factor) => switch (factor) {
-        DeviceFormFactor.phone => phone,
-        DeviceFormFactor.pad => pad,
-        DeviceFormFactor.padLandscape => padLandscape,
-        DeviceFormFactor.foldable => foldable,
-      };
+  static Size of(DeviceFormFactor factor) => DeviceFormFactorUtil.designSizeOf(factor);
 }

@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:ui' show DisplayFeatureType;
+
 import 'package:flutter/widgets.dart';
 
 /// 设备形态（用于页面适配）
@@ -17,26 +20,82 @@ enum DeviceFormFactor {
 
 /// 设备形态识别工具。
 ///
-/// 规则
-/// - foldable：判断 `MediaQuery.displayFeatures`
-/// - pad / padLandscape：`shortestSide >= 600`，横竖屏由宽高判断
-/// - 其余为 phone。
+/// 与 [AppDesignSize] 设计稿一一对应，按「宽高比 + 短边」与当前窗口做最近邻匹配；
+/// 横竖屏先过滤候选（竖屏不含 [DeviceFormFactor.padLandscape]）。
+///
+/// - foldable 仅在有 `hinge` / `fold` 的 [DisplayFeature] 时参与候选（忽略 `cutout` 刘海）
+/// - 短边 < 600 时固定为 phone（与常见平板阈值一致）
 class DeviceFormFactorUtil {
   DeviceFormFactorUtil._();
 
   static const double _padShortestSideThreshold = 600;
+  static const double _aspectWeight = 1.0;
+  static const double _shortestSideWeight = 0.5;
+
+  /// 手机竖屏设计稿（如 iPhone X / 13）。
+  static const Size designPhone = Size(375, 812);
+
+  /// iPad 竖屏设计稿。
+  static const Size designPad = Size(768, 1024);
+
+  /// iPad 横屏设计稿。
+  static const Size designPadLandscape = Size(1024, 768);
+
+  /// 折叠屏展开态设计稿。
+  static const Size designFoldable = Size(673, 841);
 
   static DeviceFormFactor of(BuildContext context) {
     return fromMediaQuery(MediaQuery.of(context));
   }
 
+  static Size designSizeOf(DeviceFormFactor factor) => switch (factor) {
+        DeviceFormFactor.phone => designPhone,
+        DeviceFormFactor.pad => designPad,
+        DeviceFormFactor.padLandscape => designPadLandscape,
+        DeviceFormFactor.foldable => designFoldable,
+      };
+
   static DeviceFormFactor fromMediaQuery(MediaQueryData mq) {
-    if (mq.displayFeatures.isNotEmpty) {
-      return DeviceFormFactor.foldable;
+    final size = mq.size;
+    if (size.shortestSide < _padShortestSideThreshold) {
+      return DeviceFormFactor.phone;
     }
-    if (mq.size.shortestSide >= _padShortestSideThreshold) {
-      return mq.size.width > mq.size.height ? DeviceFormFactor.padLandscape : DeviceFormFactor.pad;
+
+    final isLandscape = size.width > size.height;
+    final candidates = <DeviceFormFactor>[
+      DeviceFormFactor.phone,
+      if (isLandscape)
+        DeviceFormFactor.padLandscape
+      else ...[
+        DeviceFormFactor.pad,
+        if (_hasFoldableDisplayFeature(mq)) DeviceFormFactor.foldable,
+      ],
+    ];
+
+    var best = candidates.first;
+    var bestDistance = _distance(size, designSizeOf(best));
+    for (final factor in candidates.skip(1)) {
+      final d = _distance(size, designSizeOf(factor));
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = factor;
+      }
     }
-    return DeviceFormFactor.phone;
+    return best;
+  }
+
+  static bool _hasFoldableDisplayFeature(MediaQueryData mq) {
+    return mq.displayFeatures.any(
+      (f) => f.type == DisplayFeatureType.hinge || f.type == DisplayFeatureType.fold,
+    );
+  }
+
+  static double _distance(Size actual, Size design) {
+    final arA = actual.width / actual.height;
+    final arD = design.width / design.height;
+    final shortA = min(actual.width, actual.height);
+    final shortD = min(design.width, design.height);
+    return (log(arA) - log(arD)).abs() * _aspectWeight +
+        (log(shortA) - log(shortD)).abs() * _shortestSideWeight;
   }
 }
