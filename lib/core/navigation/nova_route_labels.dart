@@ -37,6 +37,7 @@ import '../../example/telemetry_demo/page_session_telemetry_flow_demo_page.dart'
 import 'nova_router.dart';
 
 /// 新增路由时：都要在此表增加一行（键用 `XxxRoute.name`，值用 `*Rt.description`）。
+/// 和 [nova_router.dart] 里面对应
 /// 埋点page_label字段，会从这里取值
 abstract final class NovaRouteLabelRegistry {
   NovaRouteLabelRegistry._();

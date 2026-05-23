@@ -46,12 +46,20 @@ part 'nova_router.gr.dart';
 /// 否则当URL 进入时，auto_route 默认会把它当成新的路径来处理，导致路由栈被重建，直接回到首页，再进入目标页面
 Future<DeepLink> novaDeepLinkBuilder(PlatformDeepLink platform) async {
   final uri = platform.uri;
+
+  /// 热启动
   if (!NovaLinkScheme.matchesAppLinkUri(uri)) {
     return platform;
   }
+
+  /// 冷启动
   if (platform.initial) {
+    /// 决定首屏
     return DeepLink.defaultPath;
   }
+
+  /// DeepLink.none：auto_route 不会再解析uri
+  /// 直接用link已经解析好的uri，进入指定页面
   return DeepLink.none;
 }
 

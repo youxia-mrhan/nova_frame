@@ -1,7 +1,7 @@
 import 'package:nova_frame/core/services/storage/storage.dart';
 import 'package:nova_frame/core/services/storage/storage_keys.dart';
 
-/// 页面 Session 埋点全局开关
+/// 埋点全局开关
 abstract final class TelemetryConfig {
   TelemetryConfig._();
 

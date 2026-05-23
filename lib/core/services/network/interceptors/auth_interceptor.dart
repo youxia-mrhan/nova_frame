@@ -13,7 +13,7 @@ final class AuthInterceptor extends dio_pkg.Interceptor {
 
   final dio_pkg.Dio _businessDio;
 
-  /// 存储触发401请求配置，登录后逐条重试
+  /// 存储触发401（token过期）请求配置，登录后逐条重试
   final ReAuthQueue _queue = ReAuthQueue();
 
   /// 执行重新登录流程的方法

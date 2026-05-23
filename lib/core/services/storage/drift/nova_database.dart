@@ -25,7 +25,7 @@ class ApiCacheTable extends Table {
 /// 进入页面停留埋点表结构
 class SessionTable extends Table {
 
-  // Table里面的tableName，必须写字符串，不可以使用 SessionTableNames.sessions; 这种引用
+  // Table里面的tableName，必须写<字符串>，不可以使用 SessionTableNames.sessions; 这种引用
   // 因为drift生成代码时，是通过反射获取表结构的，如果使用引用
   // 运行 dart run build_runner build 可能会报错
   @override

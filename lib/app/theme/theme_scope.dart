@@ -5,6 +5,7 @@ import 'app_theme_type.dart';
 import 'theme_app_colors.dart';
 import 'theme_controller.dart';
 
+/// 设置各种主题色，具体的对应颜色
 class ThemeScope extends InheritedNotifier<ThemeController> {
   const ThemeScope({
     super.key,
