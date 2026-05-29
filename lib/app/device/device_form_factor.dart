@@ -48,12 +48,19 @@ class DeviceFormFactorUtil {
     return fromMediaQuery(MediaQuery.of(context));
   }
 
-  static Size designSizeOf(DeviceFormFactor factor) => switch (factor) {
-        DeviceFormFactor.phone => designPhone,
-        DeviceFormFactor.pad => designPad,
-        DeviceFormFactor.padLandscape => designPadLandscape,
-        DeviceFormFactor.foldable => designFoldable,
-      };
+  /// 根据手机设计稿尺寸，计算出在其他设备上的缩放比例
+  static final _ratio = 1 + (DeviceFormFactorUtil.designPhone.width / DeviceFormFactorUtil.designPhone.height);
+
+  static Size designSizeOf(DeviceFormFactor factor) {
+    switch (factor) {
+      case DeviceFormFactor.phone: return designPhone;
+    // case DeviceFormFactor.pad: return designPad;
+    // case DeviceFormFactor.padLandscape: return designPadLandscape;
+    // case DeviceFormFactor.foldable: return designFoldable;
+    // 根据手机设计稿尺寸，在不同设备上缩放比例（如果不需要，对不同设备进行独立布局，推荐使用这种方式）
+      default: return Size(DeviceFormFactorUtil.designPhone.width * _ratio, DeviceFormFactorUtil.designPhone.height);
+    }
+  }
 
   static DeviceFormFactor fromMediaQuery(MediaQueryData mq) {
     final size = mq.size;
